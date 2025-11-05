@@ -1,4 +1,3 @@
-# .github/workflows/scorecard.yml
 name: OpenSSF Scorecard
 
 on:
@@ -6,7 +5,7 @@ on:
     branches: [main]
   pull_request:
   schedule:
-    - cron: '0 0 * * 0' # weekly check
+    - cron: '0 0 * * 0' # weekly
 
 jobs:
   scorecard:
@@ -18,16 +17,16 @@ jobs:
       security-events: write
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Run OpenSSF Scorecard analysis
-        uses: ossf/scorecard-action@v2
+      - name: Run OpenSSF Scorecard
+        uses: ossf/scorecard-action@v1
         with:
           results_file: results.sarif
           results_format: sarif
 
-      - name: Upload Scorecard results to GitHub Security tab
+      - name: Upload results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: results.sarif
